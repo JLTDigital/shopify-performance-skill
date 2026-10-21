@@ -42,6 +42,19 @@ For implementation:
 
 > Use shopify-performance to review this theme, implement the high-confidence theme fixes, and write a report of changes, checks, and remaining recommendations.
 
+## Run Lighthouse and Liquid measurements
+
+Version 1.1 includes a Python CLI helper that runs installed Lighthouse and Shopify CLIs and writes report-ready Markdown and JSON evidence.
+
+```sh
+python3 scripts/measure.py lighthouse https://example.com/products/example --runs 3 --device mobile --output reports/product-mobile
+python3 scripts/measure.py liquid --store example.myshopify.com --theme 123456789 --path /products/example --output reports/product-liquid
+```
+
+Run from the repository, or resolve `scripts/measure.py` from the installed skill location. Requires Python 3.10+, Lighthouse/Chrome for browser tests, and Shopify CLI plus an authorised store session for Liquid profiling. See [setup, authentication, outputs, and limitations](runtime.md).
+
+Lighthouse summaries include scores and available lab metrics, with medians and ranges. Liquid summaries identify expensive rendering frames. The skill incorporates both into the final audit report. No live store credentials or measurement data are bundled.
+
 ## Report output
 
 Every completed review produces a report with a plain-language summary, priority table, file-level findings, recommended fixes, verification steps, and scope limitations. It distinguishes code observations from measured bottlenecks and does not invent scores or expected savings. Markdown is the default; an agent can use a requested document format if its environment supports it.
@@ -52,12 +65,15 @@ Every completed review produces a report with a plain-language summary, priority
 - `theme-review.md`: Shopify-specific review guidance.
 - `measurement.md`: metric definitions and verification practices.
 - `report.md`: report structure and writing standard.
+- `runtime.md`: CLI measurement setup and report integration.
+- `scripts/measure.py`: Lighthouse and Liquid evidence collector.
+- `tests/test_measure.py`: automated helper tests.
 
 Guidance references official Shopify and web.dev documentation, checked on 21 October 2026. Validate the skill against real themes before treating it as a production audit standard. It supplies reusable instructions to a compatible agent; it is not a standalone scanner or hosted auditing service.
 
 ## Validation
 
-Skill frontmatter and naming validation passed. All local reference links resolve. Discovery and an isolated local copy installation passed with skills CLI 1.7.4, and installed files match the package. Real-theme review quality and live performance outcomes have not yet been evaluated.
+Skill frontmatter and naming validation passed. All local reference links resolve. Discovery and an isolated local copy installation passed with skills CLI 1.7.4, and installed files match the package. The measurement helper passes 12 fixture-based tests. CLI flags were checked against Lighthouse 13.4.1 and Shopify CLI 4.9.4. A local Lighthouse smoke test reached the CLI but could not connect to Chrome in the authoring environment; its failed-run output was verified. No authenticated live Liquid capture or real-theme performance outcome has yet been evaluated.
 
 ## Contributing
 
