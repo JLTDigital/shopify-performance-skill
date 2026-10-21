@@ -43,3 +43,9 @@ List completed checks, failures, and checks not run with the reason. Explain cov
 ## Writing standard
 
 Prefer “Customers wait longer to see the main product image” to “Suboptimal LCP resource prioritisation”. Use the technical term alongside the explanation when it helps implementation. Every actionable issue must answer: what is wrong, where is it, what should change, and how will we know it worked?
+
+## CLI evidence appendices
+
+When collected, incorporate the helper's `summary.md` and `summary.json` outputs from [runtime.md](runtime.md). Present Lighthouse category scores out of 100 separately from timing metrics, with device/preset, median, min/max, successful/requested runs, version, capture time, and final-page checks. Keep missing audits and failed runs visible. Do not label TBT as INP or document server-response timing as full navigation TTFB.
+
+For Shopify Liquid, state store, remote theme, route, CLI version, and capture time. Include the most relevant frames with self and inclusive milliseconds, link raw Speedscope evidence, and connect hotspots to verified source code and concrete fixes. Explain that inclusive times overlap and are not additive. If no authorised store access exists, say Liquid profiling was not run. Avoid duplicating an entire machine-generated appendix when a focused table and evidence link suffice.
