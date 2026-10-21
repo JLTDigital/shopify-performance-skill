@@ -2,7 +2,7 @@
 name: shopify-performance
 description: Review Shopify Liquid theme code for performance opportunities and write a clear, prioritised report explaining issues, affected code, fixes, and verification. Use for Shopify theme speed audits, LCP, TTFB, CLS, INP, and performance-focused code reviews. Covers Liquid storefront themes, not Hydrogen or checkout extensions.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Shopify performance review
@@ -21,7 +21,7 @@ Review the theme like a Shopify performance engineer. Deliver a report a merchan
 ## Review workflow
 
 1. **Map the storefront.** Start with layouts, template JSON/Liquid, shared sections/snippets, assets, and relevant theme settings. Trace calls and asset inclusion from entrypoints. For broad audits cover home, product, and collection pages plus shared navigation/cart/search where present; explain sampling and exclusions. For focused requests stay within scope and trace dependencies.
-2. **Establish the baseline.** Record revision, tools, URLs/page types, device conditions, and supplied metrics when available. Read [measurement.md](measurement.md) when interpreting data or planning verification. If no runtime evidence exists, label the audit “Code review — runtime performance not measured”.
+2. **Establish the baseline.** When runtime measurement is in scope, use the bundled [CLI measurement workflow](runtime.md) to run Lighthouse and, with store access, Shopify Liquid profiling. Incorporate the generated summaries and raw evidence into the report; record unavailable tooling or authentication.  Record revision, tools, URLs/page types, device conditions, and supplied metrics when available. Read [measurement.md](measurement.md) when interpreting data or planning verification. If no runtime evidence exists, label the audit “Code review — runtime performance not measured”.
 3. **Inspect performance paths.** Read [theme-review.md](theme-review.md). Follow LCP resource discovery, image sizing/loading, CSS and fonts, Liquid work, JavaScript execution, layout stability, and app integrations. Search matches are leads, not findings: inspect callers, conditions, existing mitigations, and rendered markup if available.
 4. **Validate candidates.** Confirm that the affected path can execute and explain the mechanism. Use the project's existing checks and Shopify Theme Check if available. Do not auto-correct during a review. Record unavailable checks instead of claiming they passed. Use traces or Theme Inspector to substantiate timing claims when available.
 5. **Prioritise.** Rank by likely user impact, reach across pages, evidence, effort, and regression risk. Use High for a substantial obstacle on a primary journey, Medium for meaningful but narrower or uncertain impact, and Low for modest improvements. Keep confidence separate from priority. Put unresolved suspicions under “Needs measurement”; do not pad the issue count with speculative findings.
