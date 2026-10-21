@@ -37,3 +37,7 @@ Sources: [LCP breakdown](https://web.dev/articles/optimize-lcp), [Shopify metric
 ## Functional regression checks
 
 Select checks related to the proposed change: responsive layout, image crops, product selection and availability, cart updates, filtering/pagination, keyboard and focus behaviour, consent, localisation, and editor section reordering/reloading. Use a preview/test environment for actions with store-side consequences. Report what actually ran and what still needs manual or store-access verification.
+
+## Bundled CLI measurement workflow
+
+Follow [runtime.md](runtime.md) to collect repeated Lighthouse runs and authenticated Shopify Liquid profiles with [scripts/measure.py](scripts/measure.py). The helper saves raw evidence and Markdown/JSON summaries. Use these in the audit report, retaining failures and measurement context. Lighthouse TBT is not INP, document server-response time is not full navigation TTFB, and Liquid profile spans are not browser page-load timings.
